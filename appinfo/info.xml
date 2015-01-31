@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <info>
-    <id>contacts-export</id>
+    <id>contacts_export</id>
     <name>Contacts Export</name>
     <description>Exports contacts from contacts app in the same format as created manually (grouped by address, then grouped by family name, then sorted by first name).</description>
     <version>0.0.1</version>
