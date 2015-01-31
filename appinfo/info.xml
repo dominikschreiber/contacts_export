@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<info>
+    <id>contacts-export</id>
+    <name>Contacts Export</name>
+    <description>Exports our contacts </description>
+    <version>0.0.1</version>
+    <licence>MIT</licence>
+    <author>Dominik Schreiber</author>
+    <require>7</require>
+</info>
