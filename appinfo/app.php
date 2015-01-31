@@ -10,7 +10,7 @@
     'href' => \OCP\Util::linkToRoute('contacts-export_index'),
     // the icon that will be shown in the navigation
     // this file needs to exist in img/example.png
-    'icon' => \OCP\Util::imagePath('contacts-export', 'nav-icon.png'),
+    'icon' => \OCP\Util::imagePath('contacts-export', 'contacts-export.png'),
     // the title of your application. This will be used in the
     // navigation or on the settings page of your app
     'name' => 'Contacts Export'
