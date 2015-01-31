@@ -2,9 +2,9 @@
 <info>
     <id>contacts-export</id>
     <name>Contacts Export</name>
-    <description>Exports our contacts </description>
+    <description>Exports contacts from contacts app in the same format as created manually (grouped by address, then grouped by family name, then sorted by first name).</description>
     <version>0.0.1</version>
     <licence>MIT</licence>
     <author>Dominik Schreiber</author>
-    <require>7</require>
+    <require>5</require>
 </info>
