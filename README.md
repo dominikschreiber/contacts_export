@@ -4,7 +4,7 @@ This ownCloud app allows to export contacts from the official contacts app in a 
 
 ## development setup
 
-To push to cloud.efg-ludwigshafen.de you need ssh access to efg-ludwigshafen.de (ask dominik@efg-ludwigshafen.de), then, on your local machine, perform
+To push to cloud.efg-ludwigshafen.de you need ssh access to efg-ludwigshafen.de (ask dominik.schreiber@efg-ludwigshafen.de), then, on your local machine, perform
 
 ```bash
 git remote add production ssh://<you>@efg-ludwigshafen.de/home/dominik/git/contacts-export.git
