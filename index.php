@@ -27,7 +27,7 @@ function format_vcard($vcard) {
 $formatted_users = array_map('format_vcard', $users);
 
 $tpl = new OCP\Template('contacts_export', 'main', 'user');
-$tpl->assign('users', $users);
+$tpl->assign('users', $formatted_users);
 $tpl->printPage();
 
 ?>
