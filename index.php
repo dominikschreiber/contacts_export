@@ -1,4 +1,6 @@
 <?php
+require './lib/vCards.php';
+
 function init() {
     \OCP\User::checkLoggedIn();
     \OCP\App::checkAppEnabled('contacts_export');
@@ -19,7 +21,7 @@ function raw() {
 }
 
 function parse($raw) {
-    return new \OCA\Contacts_Export\Lib\VCard(false, $raw, array('Collapse' => true));
+    return new vCard(false, $raw, array('Collapse' => true));
 }
 
 function format($parsed) {
