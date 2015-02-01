@@ -1,4 +1,6 @@
 <?php
+include 'lib/vCards.php';
+
 function init() {
     \OCP\User::checkLoggedIn();
     \OCP\App::checkAppEnabled('contacts_export');
@@ -18,8 +20,23 @@ function raw() {
     return $users;
 }
 
-function format($raw) {
-    return $raw;
+function parse($raw) {
+    $vcard = new vCard(false, $raw);
+    if (count($vcard) == 1) {
+        return [
+              ["name" => $vcard->n]
+        ];
+    } else {
+        $parsed = [];
+        foreach ($vcard as $c) {
+            $parsed[] = ["name" => $c->n]
+        }
+        return $parsed;
+    }
+}
+
+function format($parsed) {
+    return $parsed;
 }
 
 function render($formatted) {
@@ -30,7 +47,7 @@ function render($formatted) {
 
 function main() {
     init();
-    render(format(raw()));
+    render(format(parse(raw())));
 }
 
 main();
