@@ -21,18 +21,18 @@ function raw() {
 }
 
 function parse($raw) {
-    return new vCard(false, $raw, ['Collapse' => true]);
+    return new vCard(false, $raw, array('Collapse' => true));
 }
 
 function format($parsed) {
     if (count($parsed) == 1) {
-        return [
-              ['name' => $parsed->n]
-        ];
+        return array(
+              array('name' => $parsed->n)
+        );
     } else {
-        $formatted = [];
+        $formatted = array();
         foreach ($parsed as $vcard) {
-            $formatted[] = ['name' => $vcard->n];
+            $formatted[] = array('name' => $vcard->n);
         }
         return $formatted;
     }
