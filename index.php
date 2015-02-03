@@ -23,7 +23,7 @@ function parse($raw) {
     foreach ($raw as $rawUser) {
         foreach (explode('\n', str_replace('\n ', '', $rawUser)) as $line) {
             $keyValues = explode(':', $line);
-            $parsed[strtolower($keyValues[0])] = array_filter(function($v) { return $v != '' }, explode(';', $keyValues[1]));
+            $parsed[strtolower($keyValues[0])] = array_filter(function($v) { return $v != ''; }, explode(';', $keyValues[1]));
         }
     }
     return $parsed;
