@@ -21,7 +21,7 @@ function raw() {
 }
 
 function parse($raw) {
-    return new vCard(false, $raw, array('Collapse' => true));
+    return new vCard(false, $raw);
 }
 
 function format($parsed) {
