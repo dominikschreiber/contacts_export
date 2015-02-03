@@ -19,18 +19,19 @@ function raw() {
 }
 
 function parse($raw) {
-    return array_map(function($rawUser) {
-        return array_map(function($line) {
+    $parsed = array();
+    foreach ($raw as $rawUser) {
+        foreach (explode('\n', str_replace('\n ', '', $rawUser)) as $line) {
             $keyValues = explode(':', $line);
-            return array($keyValues[0] => explode(';', $keyValues[1]));
-        }, explode('\n', str_replace('\n ', '', $rawUser)));
-    }, $raw);
+            $parsed[strtolower($keyValues[0])] = explode(';', $keyValues[1]);
+        }
+    }
+    return $parsed;
 }
 
 function formatUser($parsed) {
-    return array_filter(function($property) {
-        return !in_array(strtolower($property), array('photo'));
-    }, $parsed);
+    unset($parsed['photo']);
+    return $parsed;
 }
 
 function format($parsed) {
