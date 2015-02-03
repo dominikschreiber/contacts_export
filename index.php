@@ -31,17 +31,15 @@ function parse($raw) {
     return $parsed;
 }
 
-function formatUser($vcard) {
-    unset($vcard['begin']);
-    unset($vcard['photo']);
-    unset($vcard['rev']);
-    unset($vcard['end']);
-    
-    return $vcard;
-}
-
 function format($parsed) {
-    return array_map('formatUser', $parsed);
+    foreach ($parsed as $vcard):
+        unset($vcard['begin']);
+        unset($vcard['photo']);
+        unset($vcard['rev']);
+        unset($vcard['end']);
+    endforeach;
+    
+    return $parsed;
 }
 
 function render($formatted) {
