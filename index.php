@@ -35,7 +35,7 @@ function formatUser($parsed) {
 
 function format($parsed) {
     if (count($parsed) == 1) {
-        return array(formatUser($parsed)));
+        return array(formatUser($parsed));
     } else {
         $formatted = array();
         foreach ($parsed as $vcard) {
