@@ -1,5 +1,5 @@
 <?php
-include 'lib/vCards.php';
+include 'includes/vCards.php';
 
 function init() {
     \OCP\User::checkLoggedIn();
