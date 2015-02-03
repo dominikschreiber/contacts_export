@@ -1,6 +1,4 @@
 <?php
-require 'includes/vCards.php';
-
 function init() {
     \OCP\User::checkLoggedIn();
     \OCP\App::checkAppEnabled('contacts_export');
@@ -21,18 +19,27 @@ function raw() {
 }
 
 function parse($raw) {
-    return new vCard(false, $raw);
+    return array_map(function($rawUser) {
+        return array_map(function($line) {
+            $keyValues = explode(':', $line);
+            return array($keyValues[0] => explode(';', $keyValues[1]));
+        }, explode('\n', str_replace('\n ', '', $rawUser)));
+    }, $raw);
+}
+
+function formatUser($parsed) {
+    return array_filter(function($property) {
+        return !in_array(strtolower($property), array('photo'));
+    }, $parsed);
 }
 
 function format($parsed) {
     if (count($parsed) == 1) {
-        return array(
-              array('name' => $parsed->n)
-        );
+        return array(formatUser($parsed)));
     } else {
         $formatted = array();
         foreach ($parsed as $vcard) {
-            $formatted[] = array('name' => $vcard->n);
+            $formatted[] = formatUser($vcard);
         }
         return $formatted;
     }
