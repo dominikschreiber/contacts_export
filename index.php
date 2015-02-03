@@ -1,5 +1,5 @@
 <?php
-include 'includes/vCards.php';
+require 'includes/vCards.php';
 
 function init() {
     \OCP\User::checkLoggedIn();
@@ -21,22 +21,21 @@ function raw() {
 }
 
 function parse($raw) {
-    $vcard = new vCard(false, $raw);
-    if (count($vcard) == 1) {
-        return [
-              ["name" => $vcard->n]
-        ];
-    } else {
-        $parsed = [];
-        foreach ($vcard as $c) {
-            $parsed[] = ["name" => $c->n]
-        }
-        return $parsed;
-    }
+    return new vCard(false, $raw, array('Collapse' => true));
 }
 
 function format($parsed) {
-    return $parsed;
+    if (count($parsed) == 1) {
+        return array(
+              array('name' => $parsed->n)
+        );
+    } else {
+        $formatted = array();
+        foreach ($parsed as $vcard) {
+            $formatted[] = array('name' => $vcard->n);
+        }
+        return $formatted;
+    }
 }
 
 function render($formatted) {
