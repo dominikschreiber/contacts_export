@@ -11,39 +11,37 @@ function raw() {
     $result = $query->execute($args);
 
     $users = array();
-    while ($row = $result->fetchRow()) {
+    while ($row = $result->fetchRow()):
         $users[] = $row['carddata'];
-    }
+    endwhile;
     
     return $users;
 }
 
 function parse($raw) {
     $parsed = array();
-    foreach ($raw as $rawUser) {
-        foreach (explode('\n', str_replace('\n ', '', $rawUser)) as $line) {
+    
+    foreach ($raw as $rawUser):
+        foreach (explode('\n', str_replace('\n ', '', $rawUser)) as $line):
             $keyValues = explode(':', $line);
             $parsed[strtolower($keyValues[0])] = array_filter(explode(';', $keyValues[1]), function($v) { return $v != ''; });
-        }
-    }
+        endforeach;
+    endforeach;
+    
     return $parsed;
 }
 
-function formatUser($parsed) {
-    unset($parsed['photo']);
-    return $parsed;
+function formatUser($vcard) {
+    unset($vcard['begin']);
+    unset($vcard['photo']);
+    unset($vcard['rev']);
+    unset($vcard['end']);
+    
+    return $vcard;
 }
 
 function format($parsed) {
-    if (count($parsed) == 1) {
-        return array(formatUser($parsed));
-    } else {
-        $formatted = array();
-        foreach ($parsed as $vcard) {
-            $formatted[] = formatUser($vcard);
-        }
-        return $formatted;
-    }
+    return array_map('formatUser', $parsed);
 }
 
 function render($formatted) {
